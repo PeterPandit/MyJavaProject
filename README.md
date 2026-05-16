@@ -1,91 +1,138 @@
-**Task Management System**
+# Task Manager App
 
+A simple Java-based Task Manager application that allows you to create, manage, update, and delete tasks — each with a title, description, and status.
 
-A simple Java application to manage tasks with features like adding, viewing, updating status, and deleting tasks. This system uses an ArrayList to store tasks and allows the user to interact with the system via a command-line interface.
+---
 
-**Features**
+## 📁 Project Structure
 
-**Add a new task:** Create a task by providing a title, description, and status (PENDING, IN_PROGRESS, DONE).
+```
+src/main/java/
+├── Task.java                 # Task model (id, title, description, status)
+├── Status.java               # Enum defining task statuses
+├── TaskManager.java          # Core logic for managing tasks
+└── TaskManagementSystem.java # Entry point (main method)
+```
 
-**View all tasks:** Displays all tasks with their details, including ID, title, description, and status.
+---
 
-**Update task status:** Update the status of a specific task by its ID.
+## 🗂️ Classes Overview
 
-**Delete a task:** Remove a task by its ID.
+### `Task.java`
+Represents a single task with the following fields:
 
-**Exit the system:** Close the application.
+| Field         | Type     | Description                        |
+|---------------|----------|------------------------------------|
+| `id`          | `int`    | Unique identifier for the task     |
+| `title`       | `String` | Short name/title of the task       |
+| `description` | `String` | Detailed description of the task   |
+| `status`      | `Status` | Current status of the task         |
 
-**Requirements**
+**Key Methods:**
+- `getId()`, `getTitle()`, `getDescription()`, `getStatus()` — getters
+- `setId(int)`, `setTitle(String)`, `setStatus(Status)` — setters
+- `displayTask()` — prints task details to the console
+- `toString()` — returns a formatted string representation of the task
 
-Java Development Kit (JDK) version 8 or above.
+---
 
-IDE like IntelliJ IDEA, Eclipse, or any text editor like Visual Studio Code.
+### `Status.java`
+Defines the possible statuses for a task using an inner enum:
 
+```java
+public enum status {
+    PENDING,
+    IN_PROGRESS,
+    DONE
+}
+```
 
-**Code Explanation**
+---
 
+### `TaskManager.java`
+The core class that manages a list of `Task` objects.
 
-**TaskStatus** **Enum**
+**Key Methods:**
 
-This enum defines the possible statuses for a task:
+| Method                                        | Description                                      |
+|-----------------------------------------------|--------------------------------------------------|
+| `addTask(Task task)`                          | Adds a new task to the list                      |
+| `getAllTasks()`                                | Returns all tasks as an `ArrayList<Task>`        |
+| `updateTaskStatus(int taskId, Status status)` | Updates the status of a task by its ID           |
+| `deleteTask(int taskId)`                      | Removes a task from the list by its ID           |
+| `findTaskById(int taskId)`                    | Finds and returns a task by its ID               |
+| `printTaskList()`                             | Prints all tasks in a readable format            |
 
-PENDING
+---
 
-IN_PROGRESS
+### `TaskManagementSystem.java`
+The entry point of the application. Contains the `main` method where the app logic can be wired together.
 
-DONE
+---
 
-**Task Class**
+## 🚀 Getting Started
 
-Represents a task with the following properties:
+### Prerequisites
+- Java 8 or higher
+- Maven (for build management)
 
-id (Unique identifier for each task)
+### Build & Run
 
-title (Title of the task)
+```bash
+# Clone the repository
+git clone https://github.com/PeterPandit/MyJavaProject.git
+cd MyJavaProject
 
-description (Description of the task)
+# Build with Maven
+mvn compile
 
-status (Current status of the task)
+# Run the application
+mvn exec:java -Dexec.mainClass="TaskManagementSystem"
+```
 
-**TaskManager Class**
+---
 
-Manages the list of tasks and contains the following methods:
+## 💡 Example Usage
 
-addTask(String title, String description, TaskStatus status) – Adds a new task.
+```java
+TaskManager manager = new TaskManager();
 
-viewTasks() – Displays all tasks in the system.
+// Create and add tasks
+Task task1 = new Task(1, "Buy groceries", "Milk, Eggs, Bread", Status.status.PENDING);
+Task task2 = new Task(2, "Write report", "Q2 financial report", Status.status.IN_PROGRESS);
 
-updateTaskStatus(int id, TaskStatus newStatus) – Updates the status of a task based on its ID.
+manager.addTask(task1);
+manager.addTask(task2);
 
-deleteTask(int id) – Deletes a task based on its ID.
+// Print all tasks
+manager.printTaskList();
 
-**TaskManagerApp Class**
+// Update task status
+manager.updateTaskStatus(1, Status.status.DONE);
 
-Contains the main method which runs the application and displays the following menu to the user:
+// Delete a task
+manager.deleteTask(2);
+```
 
-Add a new task
+---
 
-View all tasks
+## 📌 Task Statuses
 
-Update task status
+| Status        | Meaning                        |
+|---------------|--------------------------------|
+| `PENDING`     | Task has not been started yet  |
+| `IN_PROGRESS` | Task is currently being worked on |
+| `DONE`        | Task has been completed        |
 
-Delete a task
+---
 
-Exit the program
+## 🛠️ Built With
 
+- **Java** — Core programming language
+- **Maven** — Build and dependency management
 
-**Example**
+---
 
-**Menu:**
+## 📄 License
 
-Task Management System
-1. Add a new task
-2. View all tasks
-3. Update task status
-4. Delete a task
-5. Exit
-Choose an option:
-
-**Example Task:**
-
-Task ID: 1, Title: "Complete Homework", Description: "Complete math homework", Status: PENDING
+This project is open source and available for personal and educational use.
